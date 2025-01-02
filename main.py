@@ -116,7 +116,7 @@ class ChessApp:
             "8/8/6nq/3p2b1/7k/7p/5Kpp/3BB3 w - - 0 1": "Kf3+ Kh5 Kg3#",
         }
         
-        self.opening_book = self.load_book("book.txt")
+        self.opening_book = self.load_book("Book.txt")
         # Initialize player names
         self.player1_name = ""
         self.player2_name = ""
@@ -641,7 +641,7 @@ class ChessApp:
         captured_piece = self.board.piece_at(move.to_square)
         if captured_piece:
             self.add_captured_piece(captured_piece)
-
+        print(move)
         self.board.push(move)
         self.selected_square = None
         self.available_moves = []
@@ -814,22 +814,6 @@ class ChessApp:
                     value -= piece_values[piece.symbol().upper()]
 
         return value   
-
-    def sorting_moves(self):
-        capture_moves = []
-        non_capture_moves = []
-        checkmate_moves = []
-        for move in self.board.legal_moves:
-            if self.is_checkmate_move(move):
-                checkmate_moves.append(move)
-            elif self.is_capture_move(move):
-                capture_moves.append(move)
-            else:
-                non_capture_moves.append(move)
-
-    # Combine the categorized moves
-        moves = checkmate_moves + capture_moves + non_capture_moves
-        return moves
 
 
     def is_capture_move(self, move):
